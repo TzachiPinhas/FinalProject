@@ -7,6 +7,7 @@ public class Appointment {
     private String date="";
     private String time="";
     private String service="";
+    private String price="";
 
     public Appointment() {
     }
@@ -62,6 +63,15 @@ public class Appointment {
 
     public Appointment setService(String service) {
         this.service = service;
+        return this;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public Appointment setPrice(String price) {
+        this.price = price;
         return this;
     }
 }

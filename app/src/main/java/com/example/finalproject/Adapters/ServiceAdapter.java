@@ -71,7 +71,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
 
             type_Service.setOnClickListener(v -> {
                         if (serviceCallback != null) {
-                            serviceCallback.ServiceClicked(getItem(getAdapterPosition()), getAdapterPosition());
+                            serviceCallback.ServiceClicked(getItem(getAdapterPosition()));
                         }
                     }
             );

@@ -18,15 +18,36 @@
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
-        android:id="@+id/nav_book"
-        android:name="com.example.finalproject.ui.BookFragment"
-        android:label="@string/menu_book"
-        tools:layout="@layout/fragment_book" />
-
-    <fragment
         android:id="@+id/nav_edit"
         android:name="com.example.finalproject.ui.EditingDetailsFragment"
         android:label="@string/menu_edit"
         tools:layout="@layout/fragment_editing_details" />
+
+    <fragment
+        android:id="@+id/nav_myAppointments"
+        android:name="com.example.finalproject.ui.AllAppointmentsFragment"
+        android:label="@string/menu_myAppointment"
+        tools:layout="@layout/fragment_all_appointments" />
+
+
+
+
+    <navigation android:id="@+id/nested_appointment"
+        app:startDestination="@id/nav_book">
+        <fragment
+            android:id="@+id/nav_book"
+            android:name="com.example.finalproject.ui.BookFragment"
+            android:label="@string/menu_book"
+            tools:layout="@layout/fragment_book" >
+            <action
+                android:id="@+id/action_nav_book_to_dateFragment"
+                app:destination="@id/dateFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/dateFragment"
+            android:name="com.example.finalproject.ui.DateFragment"
+            android:label="@string/fragment_date"
+            tools:layout="@layout/fragment_date" />
+    </navigation>
 
 </navigation>

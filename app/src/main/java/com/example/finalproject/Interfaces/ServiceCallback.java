@@ -4,6 +4,6 @@ import com.example.finalproject.Models.Service;
 
 public interface ServiceCallback {
 
-    void ServiceClicked (Service service, int position);
+    void ServiceClicked (Service service);
 
 }

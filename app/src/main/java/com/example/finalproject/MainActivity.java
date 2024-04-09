@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
-
     private FirebaseAuth auth;
 
 
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_book,R.id.nav_edit,R.id.nav_logout)
+                R.id.nav_home, R.id.nav_gallery, R.id.nested_appointment,R.id.nav_edit,R.id.nav_logout,R.id.nav_myAppointments)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -105,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
 
     @Override
     public boolean onSupportNavigateUp() {

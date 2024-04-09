@@ -11,5 +11,12 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_book">Book Appointment</string>
     <string name="menu_edit">Edit Details</string>
+    <string name="fragment_date">Appointment selection</string>
+    <string name="menu_myAppointment">My Appointment</string>
+    <string name="menu_log">Logout</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    fragment_date
 
 </resources>

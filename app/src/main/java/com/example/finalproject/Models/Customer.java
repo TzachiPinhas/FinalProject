@@ -6,10 +6,9 @@ public class Customer {
     private String customerId;
     private String name;
     private String email;
-
     private String phone;
 
-    private List<Appointment> appointments;
+    private List<String> appointments;
 
     public Customer() {
     }
@@ -50,11 +49,11 @@ public class Customer {
         return this;
     }
 
-    public List<Appointment> getAppointments() {
+    public List<String> getAppointments() {
         return appointments;
     }
 
-    public Customer setAppointments(List<Appointment> appointments) {
+    public Customer setAppointments(List<String> appointments) {
         this.appointments = appointments;
         return this;
     }
