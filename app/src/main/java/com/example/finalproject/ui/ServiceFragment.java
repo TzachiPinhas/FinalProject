@@ -16,15 +16,15 @@ import com.example.finalproject.Interfaces.ServiceCallback;
 import com.example.finalproject.Models.Service;
 import com.example.finalproject.R;
 import com.example.finalproject.Utilities.ServiceManager;
-import com.example.finalproject.databinding.FragmentBookBinding;
-public class BookFragment extends Fragment {
+import com.example.finalproject.databinding.FragmentServiceBinding;
+public class ServiceFragment extends Fragment {
     private RecyclerView main_LST_service;
-    private FragmentBookBinding binding;
+    private FragmentServiceBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        binding = FragmentBookBinding.inflate(inflater, container, false);
+        binding = FragmentServiceBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         findViews();
         initViews(root);

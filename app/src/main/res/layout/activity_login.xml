@@ -60,16 +60,6 @@
             android:hint="Phone"
             android:inputType="phone" />
 
-        <EditText
-            android:id="@+id/dobEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/phoneEditText"
-            android:layout_marginStart="@dimen/margin"
-            android:layout_marginTop="@dimen/margin"
-            android:layout_marginEnd="@dimen/margin"
-            android:hint="Date of Birth"
-            android:inputType="date" />
 
     </LinearLayout>
 

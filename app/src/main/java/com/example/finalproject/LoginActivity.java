@@ -3,6 +3,7 @@ package com.example.finalproject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultCallback;
@@ -16,7 +17,6 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.finalproject.Models.Customer;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
-import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -39,10 +39,12 @@ public class LoginActivity extends AppCompatActivity {
     private EditText nameEditText;
     private EditText emailEditText;
     private EditText phoneEditText;
-    private EditText dobEditText;
-
     private DatabaseReference customerBookRef;
     private ValueEventListener customerBookListener;
+
+    private String name;
+    private String email;
+    private String phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,11 +64,10 @@ public class LoginActivity extends AppCompatActivity {
 
         if (user == null) {
             login();
-        }
-        else {
+        } else {
+            prepopulateUserDetails(user);
             checkUserExistence(user);
         }
-
         login_BTN_save.setOnClickListener(v -> {
             // Check if the user is signed in before saving details
             FirebaseUser currentUser = auth.getCurrentUser();
@@ -83,7 +84,13 @@ public class LoginActivity extends AppCompatActivity {
                     .signOut(this)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         public void onComplete(@NonNull Task<Void> task) {
-                            // ...
+                            if (task.isSuccessful()) {
+                                Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Failed to sign out", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
         });
@@ -95,7 +102,6 @@ public class LoginActivity extends AppCompatActivity {
         nameEditText = findViewById(R.id.nameEditText);
         emailEditText = findViewById(R.id.emailEditText);
         phoneEditText = findViewById(R.id.phoneEditText);
-        dobEditText = findViewById(R.id.dobEditText);
     }
 
     private void login() {
@@ -123,25 +129,17 @@ public class LoginActivity extends AppCompatActivity {
             new ActivityResultCallback<FirebaseAuthUIAuthenticationResult>() {
                 @Override
                 public void onActivityResult(FirebaseAuthUIAuthenticationResult result) {
-                    onSignInResult(result);
+                    if (result.getResultCode() == RESULT_OK && FirebaseAuth.getInstance().getCurrentUser() != null) {
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        prepopulateUserDetails(user);
+                        checkUserExistence(user);
+                    } else if (result.getIdpResponse() != null && result.getIdpResponse().getError() != null) {
+                        Toast.makeText(LoginActivity.this, "Authentication failed: " + result.getIdpResponse().getError().getErrorCode(), Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-    );
+            });
 
-    private void onSignInResult(FirebaseAuthUIAuthenticationResult result) {
-        IdpResponse response = result.getIdpResponse();
-        if (result.getResultCode() == RESULT_OK) {
-            // Successfully signed in
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            checkUserExistence(user);
-            // ...
-        } else {
-            // Sign in failed. If response is null the user canceled the
-            // sign-in flow using the back button. Otherwise check
-            // response.getError().getErrorCode() and handle the error.
-            // ...
-        }
-    }
+
 
     private void checkUserExistence(FirebaseUser user) {
         // Get a reference to the customer book in the database
@@ -170,31 +168,77 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void saveUserDetails(FirebaseUser user) {
+        String name = nameEditText.isEnabled() ? nameEditText.getText().toString().trim() : nameEditText.getText().toString();
+        String email = emailEditText.isEnabled() ? emailEditText.getText().toString().trim() : emailEditText.getText().toString();
+        String phone = phoneEditText.isEnabled() ? phoneEditText.getText().toString().trim() : phoneEditText.getText().toString();
 
-        // Set user details
+        if (!isValidInput()) {
+            Toast.makeText(this, "Please enter valid details", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         Customer customer = new Customer()
                 .setCustomerId(user.getUid())
-                .setName(nameEditText.getText().toString())
-                .setPhone(phoneEditText.getText().toString())
-                .setEmail(emailEditText.getText().toString())
+                .setName(name)
+                .setPhone(phone)
+                .setEmail(email)
                 .setAppointments(null);
 
+        DatabaseReference customerBookRef = FirebaseDatabase.getInstance().getReference("customerBook");
 
-        // Save user details to the database
         customerBookRef.child(user.getUid()).setValue(customer)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            intent.putExtra("user",user);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            // Failed to save user details, show error message or retry
-                        }
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.putExtra("user", user);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Failed to save user details", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+
+
+    private boolean isValidInput() {
+        if (nameEditText.isEnabled() && nameEditText.getText().toString().trim().isEmpty()) {
+            nameEditText.setError("Please enter your name");
+            return false;
+        }
+        if (emailEditText.isEnabled() && (emailEditText.getText().toString().trim().isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(emailEditText.getText().toString().trim()).matches())) {
+            emailEditText.setError("Invalid email format");
+            return false;
+        }
+        if (phoneEditText.isEnabled() && (phoneEditText.getText().toString().trim().isEmpty() || !android.util.Patterns.PHONE.matcher(phoneEditText.getText().toString().trim()).matches())) {
+            phoneEditText.setError("Invalid phone number");
+            return false;
+        }
+        return true;
+    }
+
+
+    private void prepopulateUserDetails(FirebaseUser user) {
+        if (user.getDisplayName() != null && !user.getDisplayName().isEmpty()) {
+            nameEditText.setText(user.getDisplayName());
+            nameEditText.setEnabled(false);
+        } else {
+            nameEditText.setEnabled(true);
+        }
+
+        if (user.getEmail() != null && !user.getEmail().isEmpty()) {
+            emailEditText.setText(user.getEmail());
+            emailEditText.setEnabled(false);
+        } else {
+            emailEditText.setEnabled(true);
+        }
+
+        if (user.getPhoneNumber() != null && !user.getPhoneNumber().isEmpty()) {
+            phoneEditText.setText(user.getPhoneNumber());
+            phoneEditText.setEnabled(false);
+        } else {
+            phoneEditText.setEnabled(true);
+        }
     }
 
 

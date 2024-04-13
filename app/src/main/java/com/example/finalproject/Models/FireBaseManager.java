@@ -3,6 +3,7 @@ package com.example.finalproject.Models;
 import androidx.annotation.NonNull;
 
 import com.example.finalproject.Interfaces.AppointmentLoadListener;
+import com.example.finalproject.Interfaces.ReviewLoadListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -13,12 +14,17 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class FireBaseManager {
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReferenceAp;
+
+    private DatabaseReference databaseReferenceRe;
+
+
     private FirebaseDatabase db;
 
     public FireBaseManager() {
         db = FirebaseDatabase.getInstance();
-        databaseReference = FirebaseDatabase.getInstance().getReference("appointments");
+        databaseReferenceAp = FirebaseDatabase.getInstance().getReference("appointments");
+        databaseReferenceRe= FirebaseDatabase.getInstance().getReference("reviews");
     }
 
     public void saveAppointmentForUser(FirebaseAuth user, String appointmentId) {
@@ -55,10 +61,9 @@ public class FireBaseManager {
     }
 
 
-
     public void getAllAppointments(AppointmentLoadListener listener) {
         ArrayList<Appointment> appointments = new ArrayList<>();
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReferenceAp.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()) {
@@ -67,6 +72,31 @@ public class FireBaseManager {
                 }
                 listener.onAppointmentLoaded(appointments); // Call the callback with the loaded appointments
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle error case
+            }
+        });
+    }
+
+    public void saveReview(Review review) {
+        DatabaseReference ref = db.getReference("reviews").child(review.getReviewId());
+        ref.setValue(review);
+    }
+
+    public void getAllReviews(ReviewLoadListener listener) {
+        ArrayList<Review> reviews = new ArrayList<>();
+        databaseReferenceRe.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    Review review = ds.getValue(Review.class);
+                    reviews.add(review);
+                }
+                listener.onReviewLoaded(reviews); // Call the callback with the loaded reviews
+            }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 // Handle error case

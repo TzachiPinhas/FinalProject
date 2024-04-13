@@ -18,27 +18,27 @@
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
-        android:id="@+id/nav_edit"
-        android:name="com.example.finalproject.ui.EditingDetailsFragment"
-        android:label="@string/menu_edit"
-        tools:layout="@layout/fragment_editing_details" />
+        android:id="@+id/nav_about"
+        android:name="com.example.finalproject.ui.AboutUsFragment"
+        android:label="@string/menu_about"
+        tools:layout="@layout/fragment_about_us" />
 
     <fragment
-        android:id="@+id/nav_myAppointments"
-        android:name="com.example.finalproject.ui.AllAppointmentsFragment"
-        android:label="@string/menu_myAppointment"
-        tools:layout="@layout/fragment_all_appointments" />
+        android:id="@+id/nav_review"
+        android:name="com.example.finalproject.ui.WriteReviewFragment"
+        android:label="@string/menu_review"
+        tools:layout="@layout/fragment_about_us" />
 
 
 
 
     <navigation android:id="@+id/nested_appointment"
-        app:startDestination="@id/nav_book">
+        app:startDestination="@id/nav_Service">
         <fragment
-            android:id="@+id/nav_book"
-            android:name="com.example.finalproject.ui.BookFragment"
-            android:label="@string/menu_book"
-            tools:layout="@layout/fragment_book" >
+            android:id="@+id/nav_Service"
+            android:name="com.example.finalproject.ui.ServiceFragment"
+            android:label="@string/menu_Service"
+            tools:layout="@layout/fragment_service" >
             <action
                 android:id="@+id/action_nav_book_to_dateFragment"
                 app:destination="@id/dateFragment" />
@@ -48,6 +48,25 @@
             android:name="com.example.finalproject.ui.DateFragment"
             android:label="@string/fragment_date"
             tools:layout="@layout/fragment_date" />
+    </navigation>
+
+
+    <navigation android:id="@+id/nested_myAppointments"
+        app:startDestination="@id/nav_myAppointments">
+        <fragment
+            android:id="@+id/nav_myAppointments"
+            android:name="com.example.finalproject.ui.AllAppointmentsFragment"
+            android:label="@string/menu_myAppointment"
+            tools:layout="@layout/fragment_all_appointments" >
+            <action
+                android:id="@+id/action_nav_myAppointments"
+                app:destination="@id/nav_myPastAppointments" />
+        </fragment>
+        <fragment
+            android:id="@+id/nav_myPastAppointments"
+            android:name="com.example.finalproject.ui.PastAppointmentFragment"
+            android:label="My Past Appointments"
+            tools:layout="@layout/fragment_past_appointment" />
     </navigation>
 
 </navigation>

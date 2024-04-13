@@ -17,7 +17,6 @@ gmsPlayServicesAuth="20.7.0"
 activity = "1.8.0"
 legacySupportV4 = "1.0.0"
 
-
 [libraries]
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -35,8 +34,6 @@ firebase-authentication-ui = {module = "com.firebaseui:firebase-ui-auth", versio
 gms-play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "gmsPlayServicesAuth"}
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support-v4", version.ref = "legacySupportV4" }
-
-
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
