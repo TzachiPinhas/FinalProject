@@ -42,9 +42,6 @@ public class LoginActivity extends AppCompatActivity {
     private DatabaseReference customerBookRef;
     private ValueEventListener customerBookListener;
 
-    private String name;
-    private String email;
-    private String phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent signInIntent = AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
-                .setLogo(R.drawable.barber_shop)
+                .setLogo(R.drawable.logo)
                 .build();
 
 
@@ -149,7 +146,7 @@ public class LoginActivity extends AppCompatActivity {
         customerBookListener = customerBookRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child(user.getUid()).exists()) {
+                if (dataSnapshot.child(user.getUid()).exists() ) {
                     // User exists in the database, transfer to main page
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
@@ -179,9 +176,9 @@ public class LoginActivity extends AppCompatActivity {
 
         Customer customer = new Customer()
                 .setCustomerId(user.getUid())
+                .setEmail(email)
                 .setName(name)
                 .setPhone(phone)
-                .setEmail(email)
                 .setAppointments(null);
 
         DatabaseReference customerBookRef = FirebaseDatabase.getInstance().getReference("customerBook");

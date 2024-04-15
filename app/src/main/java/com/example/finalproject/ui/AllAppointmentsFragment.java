@@ -42,19 +42,18 @@ public class AllAppointmentsFragment extends Fragment {
     private int count;
 
 
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentAllAppointmentsBinding.inflate(inflater, container, false);
-        count=0;
+        count = 0;
         allAppointments = new ArrayList<>();
         myAppointments = new ArrayList<>();
         root = binding.getRoot();
         auth = FirebaseAuth.getInstance();
         fbm = new FireBaseManager();
-        getAllAppointmentFromData();
         findViews();
+        getAllAppointmentFromData();
 
         return root;
     }
@@ -83,7 +82,6 @@ public class AllAppointmentsFragment extends Fragment {
             });
         }
         initViews(root);
-
     }
 
     private void initViews(View root) {
@@ -92,8 +90,8 @@ public class AllAppointmentsFragment extends Fragment {
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         main_LST_appointments.setLayoutManager(linearLayoutManager);
         main_LST_appointments.setAdapter(appointmentAdapter);
-        count= appointmentAdapter.getItemCount();
-        if (count==0){
+        count = appointmentAdapter.getItemCount();
+        if (count == 0) {
             updateNoAppointmentsView();
         }
         show_BTN_history.setOnClickListener(v -> {
@@ -105,7 +103,7 @@ public class AllAppointmentsFragment extends Fragment {
             @Override
             public void cancelCallback(Appointment appointment, int position) {
                 removeAppointment(appointment);
-                appointmentAdapter.notifyDataSetChanged();
+                getActivity().recreate();
             }
         });
     }
@@ -113,7 +111,15 @@ public class AllAppointmentsFragment extends Fragment {
     public void removeAppointment(Appointment appointment) {
         fbm.removeAppointment(appointment);
         fbm.removeAppointmentForUser(appointment.getIdCustomer(), appointment.getAppointmentId());
-        myAppointments.remove(appointment);
+        processRemove();
+    }
+
+    private void processRemove() {
+        myAppointments.size();
+        myAppointments.clear();  // Clear existing data
+        myAppointments.size();
+        allAppointments.clear();
+        getAllAppointmentFromData();
     }
 
     private void getAllAppointmentFromData() {
@@ -131,6 +137,7 @@ public class AllAppointmentsFragment extends Fragment {
     }
 
     private void getAppointments(ArrayList<Appointment> appointments) {
+        allAppointments.clear();
         allAppointments.addAll(appointments);
     }
 
@@ -142,11 +149,9 @@ public class AllAppointmentsFragment extends Fragment {
     }
 
 
-
     private void findViews() {
         main_LST_appointments = binding.mainLSTAppointments;
         show_BTN_history = binding.showBTNHistory;
-
     }
 
     @Override

@@ -4,29 +4,98 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_light"
+    android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".ui.HomeFragment">
 
-    <TextView
-        android:id="@+id/text_home"
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/imageViewSalon"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/barber_image" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/login_BTN_signOut"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textViewGreeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageViewSalon"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        tools:text="Hello, User!" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textViewNextAppointment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewGreeting"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/black"
+
+        android:textSize="20sp"
+        tools:text="Your next appointment is:" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textViewReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewNextAppointment"
+
+        android:layout_marginTop="20dp"
+        android:text="Some of the reviews that customers wrote about us:"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />  <!-- Placeholder text -->
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textViewRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewReview"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:paddingBottom="4dp"
+        android:textColor="@color/black"
+
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:text="Rating" />  <!-- Placeholder text -->
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewReviews"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_below="@id/textViewRating"
+        android:layout_marginTop="20dp"
+        tools:listitem="@layout/horisontal_review_item" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin"
-        android:textSize="@dimen/text_size"
-        android:text="Sign Out"
-        />
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/make_btn_appointment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:layout_weight="1"
+            android:text="Make an appointment" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/view_btn_appointments"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:text="View all appointments" />
+
+    </LinearLayout>
 
 </RelativeLayout>

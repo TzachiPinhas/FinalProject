@@ -2,7 +2,6 @@ package com.example.finalproject;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,6 +15,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.bumptech.glide.Glide;
+import com.example.finalproject.Interfaces.UserLoadListener;
+import com.example.finalproject.Models.Customer;
 import com.example.finalproject.Models.FireBaseManager;
 import com.example.finalproject.databinding.ActivityMainBinding;
 import com.firebase.ui.auth.AuthUI;
@@ -57,29 +58,38 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nested_appointment,R.id.nav_about,R.id.nav_logout,R.id.nested_myAppointments,R.id.nav_review)
+                R.id.nav_home, R.id.nested_appointment, R.id.nav_about, R.id.nav_logout, R.id.nested_myAppointments, R.id.nav_review)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
         View header = navigationView.getHeaderView(0);
-        changeNavHeader(header,user);
+        changeNavHeader(header, user);
 
         navigationView.getMenu().findItem(R.id.nav_logout).setOnMenuItemClickListener(menuItem -> {
             logout();
             return true;
         });
-        }
+    }
 
-    private void changeNavHeader(View header,FirebaseUser user) {
+    private void changeNavHeader(View header, FirebaseUser user) {
         TextView textTitleLabel = header.findViewById(R.id.name_LBL);
         TextView emailTitleLabel = header.findViewById(R.id.email_LBL);
         ImageView imageTitleLabel = header.findViewById(R.id.main_image);
-        textTitleLabel.setText(user.getDisplayName());
-        emailTitleLabel.setText(user.getEmail());
 
+        fbm.getCustomerByUID(user.getUid(), new UserLoadListener() {
+            @Override
+            public void onUserLoaded(Customer customerDetails) {
+                textTitleLabel.setText(customerDetails.getName());
+                emailTitleLabel.setText(customerDetails.getEmail());
+            }
 
+            @Override
+            public void onUserLoadFailed(String message) {
+                System.err.println("Failed to load customer: " + message);
+            }
+        });
         Glide.with(header.getContext())
                 .load(user.getPhotoUrl())
                 .into(imageTitleLabel);
@@ -92,13 +102,6 @@ public class MainActivity extends AppCompatActivity {
                 .override(200, 200) // Resize the image
                 .into(imageTitleLabel);
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
     }
 
 
@@ -124,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-
 
 
 }

@@ -1,14 +1,11 @@
 package com.example.finalproject.Models;
 
 public class Review {
-    private String reviewId="";
+    private String reviewId = "";
     private String name = "";
     private String overview = "";
     private String date = "";
     private float rating = 0.0f;
-    public final static int MAX_LINES_COLLAPSED = 3;
-    private boolean isCollapsed = true;
-
 
     public Review() {
     }
@@ -55,15 +52,6 @@ public class Review {
 
     public Review setRating(float rating) {
         this.rating = rating;
-        return this;
-    }
-
-    public boolean isCollapsed() {
-        return isCollapsed;
-    }
-
-    public Review setCollapsed(boolean collapsed) {
-        isCollapsed = collapsed;
         return this;
     }
 }

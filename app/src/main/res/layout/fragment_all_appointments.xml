@@ -4,16 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_light"
     tools:context=".ui.AllAppointmentsFragment">
 
     <TextView
         android:id="@+id/no_appointments_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No future appointments at the moment."
-        android:visibility="gone"
         android:layout_centerInParent="true"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        android:text="No future appointments at the moment."
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/black"
+        android:visibility="gone" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/appointment_LBL_title"
@@ -30,8 +33,8 @@
         android:id="@+id/main_LST_appointments"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_below="@id/appointment_LBL_title"
         android:layout_above="@id/show_BTN_history"
+        android:layout_below="@id/appointment_LBL_title"
         android:layout_marginTop="5dp"
         tools:listitem="@layout/horisontal_appointment_item" />
 
@@ -40,11 +43,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="Show history of appointments"
-        android:textSize="18sp"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/black"
         android:layout_margin="10dp"
+        android:backgroundTint="@color/blue_500"
+        android:text="Show history of appointments"
+        android:textColor="@color/white"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
 </RelativeLayout>

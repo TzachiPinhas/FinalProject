@@ -4,10 +4,9 @@ import java.util.List;
 
 public class Customer {
     private String customerId;
-    private String name;
     private String email;
+    private String name;
     private String phone;
-
     private List<String> appointments;
 
     public Customer() {
@@ -22,21 +21,21 @@ public class Customer {
         return this;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public Customer setName(String name) {
-        this.name = name;
-        return this;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public Customer setEmail(String email) {
         this.email = email;
+        return this;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Customer setName(String name) {
+        this.name = name;
         return this;
     }
 
@@ -58,3 +57,5 @@ public class Customer {
         return this;
     }
 }
+
+
