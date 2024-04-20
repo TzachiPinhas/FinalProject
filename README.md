@@ -80,14 +80,14 @@ Barber Book streamlines the process of scheduling and managing appointments for 
    
    ![image](https://github.com/TzachiPinhas/FinalProject/assets/141555220/26bf8aed-e9a9-401a-807e-7a875121ab7c)
 
-5. **Reviews and Ratings**: After an appointment, customers can leave reviews and rate the service they received, which can be viewed by other users.
+5. **Reviews and Ratings**: Customers can leave reviews and rate the service they received, which can be viewed by other users.
    
    ![image](https://github.com/TzachiPinhas/FinalProject/assets/141555220/52898374-99c4-4663-b48b-fa38ffc7f332)
 
 
 ### For Hairstylists
 
-1. **View Appointments**: The main dashboard displays all upcoming and past appointments. Hairstylists can filter these appointments by date. For each appointment, hairstylists can view detailed information about the customer
+1. **View Appointments**: Displaying all upcoming and previous meetings. Hairstylists can filter these appointments by date. For each appointment, hairdressers can view detailed information about the client
    
 ![image](https://github.com/TzachiPinhas/FinalProject/assets/141555220/41bde73c-1da1-44af-90a9-0c086b69b1d3)
 
