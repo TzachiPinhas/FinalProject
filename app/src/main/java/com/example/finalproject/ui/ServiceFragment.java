@@ -17,6 +17,7 @@ import com.example.finalproject.Models.Service;
 import com.example.finalproject.R;
 import com.example.finalproject.Utilities.ServiceManager;
 import com.example.finalproject.databinding.FragmentServiceBinding;
+
 public class ServiceFragment extends Fragment {
     private RecyclerView main_LST_service;
     private FragmentServiceBinding binding;
@@ -32,7 +33,7 @@ public class ServiceFragment extends Fragment {
         return root;
     }
 
-    private void initViews(View view) {
+    private void initViews(View view) { // Initialize views and set up the recycler view
         ServiceAdapter serviceAdapter = new ServiceAdapter(view.getContext(), ServiceManager.getServices());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
@@ -46,14 +47,14 @@ public class ServiceFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putString("service", service.getName());
                 bundle.putString("price", service.getPrice());
-                Navigation.findNavController(view).navigate(R.id.action_nav_book_to_dateFragment, bundle);
+                Navigation.findNavController(view).navigate(R.id.action_nav_service_to_dateFragment, bundle); // Navigate to the date fragment
             }
         });
     }
 
 
     private void findViews() {
-        main_LST_service=binding.mainLSTService;
+        main_LST_service = binding.mainLSTService;
     }
 
 

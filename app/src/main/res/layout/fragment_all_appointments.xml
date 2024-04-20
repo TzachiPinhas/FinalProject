@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-
+        android:gravity="center"
         android:text="No future appointments at the moment."
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/black"
@@ -21,33 +21,67 @@
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/appointment_LBL_title"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="@dimen/title_height"
+        android:layout_marginTop="@dimen/margin_10"
         android:gravity="center"
         android:text="Future Appointments"
         android:textColor="@color/black"
-        android:textSize="30sp"
+        android:textSize="@dimen/text_size30"
         android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main_LST_appointments"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_above="@id/show_BTN_history"
+        android:layout_above="@id/edit_Date"
         android:layout_below="@id/appointment_LBL_title"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="@dimen/margin_5"
         tools:listitem="@layout/horisontal_appointment_item" />
+
+
+    <EditText
+        android:id="@+id/edit_Date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/show_BTN_history"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginTop="@dimen/margin_10"
+        android:clickable="true"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:hint="Display appointments by date:"
+        android:inputType="date"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="@dimen/text_size20"
+        android:textStyle="bold" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/show_BTN_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/show_BTN_history"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/margin_10"
+        android:layout_marginEnd="@dimen/margin_30"
+        android:backgroundTint="@color/blue_500"
+        android:clickable="true"
+        android:src="@drawable/refresh"
+        app:fabCustomSize="50dp"
+        app:maxImageSize="40dp" />
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/show_BTN_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_margin="10dp"
+        android:layout_margin="@dimen/margin_10"
         android:backgroundTint="@color/blue_500"
         android:text="Show history of appointments"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="@dimen/text_size_18"
         android:textStyle="bold" />
+
 
 </RelativeLayout>

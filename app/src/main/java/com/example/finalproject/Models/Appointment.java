@@ -1,13 +1,14 @@
 package com.example.finalproject.Models;
 
 public class Appointment {
-    private String appointmentId="";
-    private String idCustomer="";
-    private String customerName="";
-    private String date="";
-    private String time="";
-    private String service="";
-    private String price="";
+    private String appointmentId = "";
+    private String idCustomer = "";
+    private String customerName = "";
+    private String date = "";
+    private String time = "";
+    private String service = "";
+    private String price = "";
+    private String costumerPhone = "";
 
     public Appointment() {
     }
@@ -72,6 +73,15 @@ public class Appointment {
 
     public Appointment setPrice(String price) {
         this.price = price;
+        return this;
+    }
+
+    public String getCostumerPhone() {
+        return costumerPhone;
+    }
+
+    public Appointment setCostumerPhone(String costumerPhone) {
+        this.costumerPhone = costumerPhone;
         return this;
     }
 }

@@ -18,7 +18,7 @@ import com.google.android.material.textview.MaterialTextView;
 public class AboutUsFragment extends Fragment {
     private FragmentAboutUsBinding binding;
 
-    private  MaterialTextView textViewIntroduction;
+    private MaterialTextView textViewIntroduction;
     private MaterialTextView dayHours00;
     private MaterialTextView dayHours01;
     private MaterialTextView dayHours10;
@@ -27,7 +27,6 @@ public class AboutUsFragment extends Fragment {
     private FloatingActionButton buttonPhone;
 
     private MaterialTextView textViewAddress;
-
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -41,12 +40,13 @@ public class AboutUsFragment extends Fragment {
         return root;
     }
 
-    public void navigateToMaps(View view) {
+    public void navigateToMaps(View view) { // This method is called when the user clicks on the map button
         Uri gmmIntentUri = Uri.parse("google.navigation:q=20+Trumpeldor+St,+Petah+Tikva");
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
         startActivity(mapIntent);
     }
+
     private void initViews() {
         textViewIntroduction.setText(AboutUsManager.getDescription());
         String hours[][] = AboutUsManager.getInfoArray();
@@ -59,23 +59,22 @@ public class AboutUsFragment extends Fragment {
         buttonPhone.setOnClickListener(this::callToPhone);
     }
 
-    private void callToPhone(View view) {
+    private void callToPhone(View view) { // This method is called when the user clicks on the phone button
         Intent intent = new Intent(Intent.ACTION_DIAL);
         intent.setData(Uri.parse("tel:+972544409035"));
         startActivity(intent);
     }
 
 
-
     private void findViews() {
-         textViewIntroduction = binding.textViewIntroduction;
-         dayHours00 =binding.dayHours00;
-         dayHours01= binding.dayHours01;
-         dayHours10= binding.dayHours10;
-         dayHours11= binding.dayHours11;
-         buttonOpenMaps = binding.buttonOpenMaps;
-         buttonPhone = binding.buttonPhone;
-         textViewAddress = binding.textViewAddress;
+        textViewIntroduction = binding.textViewIntroduction;
+        dayHours00 = binding.dayHours00;
+        dayHours01 = binding.dayHours01;
+        dayHours10 = binding.dayHours10;
+        dayHours11 = binding.dayHours11;
+        buttonOpenMaps = binding.buttonOpenMaps;
+        buttonPhone = binding.buttonPhone;
+        textViewAddress = binding.textViewAddress;
     }
 
     @Override

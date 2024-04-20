@@ -4,12 +4,12 @@ public class AboutUsManager {
 
 
     public static String getDescription() {
-        String description= "We are a professional barbershop that offers a wide range of services";
+        String description = "We blend traditional craftsmanship with modern style, providing a unique grooming experience that caters to the individual needs and preferences of each client.";
         return description;
     }
 
     public static String getEmail() {
-        String email= "";
+        String email = "";
         return email;
     }
 
@@ -23,7 +23,7 @@ public class AboutUsManager {
     }
 
     public static String getAdress() {
-        String adress= "Our adress is: Trumpeldor St 20, Petah Tikva";
+        String adress = "Our adress is: Trumpeldor St 20, Petah Tikva";
         return adress;
     }
 }

@@ -9,9 +9,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="@dimen/image_size_300"
         android:layout_centerInParent="true"
-        android:layout_margin="50dp"
+        android:layout_margin="@dimen/margin_50"
         android:layout_weight="1"
         android:orientation="vertical">
 
@@ -19,7 +19,7 @@
             android:id="@+id/edit_Txt_Date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="@dimen/margin_50"
             android:clickable="true"
             android:ems="10"
             android:focusable="false"
@@ -28,14 +28,14 @@
             android:inputType="date"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_size20"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edit_Txt_Time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="@dimen/margin_50"
             android:clickable="true"
             android:ems="10"
             android:focusable="false"
@@ -44,7 +44,7 @@
             android:inputType="time"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_size20"
             android:textStyle="bold" />
 
         <com.google.android.material.button.MaterialButton
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:text="make an appointment"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size"
+            android:textSize="@dimen/text_size20"
             android:textStyle="bold" />
 
 

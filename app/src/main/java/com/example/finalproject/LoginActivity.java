@@ -14,7 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.finalproject.Models.Customer;
+import com.example.finalproject.Models.User;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult;
@@ -39,8 +39,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText nameEditText;
     private EditText emailEditText;
     private EditText phoneEditText;
-    private DatabaseReference customerBookRef;
-    private ValueEventListener customerBookListener;
+    private DatabaseReference usersBookRef;
+    private ValueEventListener userBookListener;
 
 
     @Override
@@ -139,11 +139,11 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void checkUserExistence(FirebaseUser user) {
-        // Get a reference to the customer book in the database
-        customerBookRef = FirebaseDatabase.getInstance().getReference("customerBook");
+        // Get a reference to the User  in the database
+        usersBookRef = FirebaseDatabase.getInstance().getReference("users");
 
-        // Listen for changes in the customer book
-        customerBookListener = customerBookRef.addValueEventListener(new ValueEventListener() {
+        // Listen for changes in the users
+        userBookListener = usersBookRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.child(user.getUid()).exists() ) {
@@ -174,16 +174,17 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        Customer customer = new Customer()
-                .setCustomerId(user.getUid())
+        User customer = new User()  //save user details
+                .setUserId(user.getUid())
                 .setEmail(email)
                 .setName(name)
                 .setPhone(phone)
-                .setAppointments(null);
+                .setAppointments(null)
+                .setBarber("false");
 
-        DatabaseReference customerBookRef = FirebaseDatabase.getInstance().getReference("customerBook");
+        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users"); //save user details
 
-        customerBookRef.child(user.getUid()).setValue(customer)
+        usersRef.child(user.getUid()).setValue(customer) //save user details to the database
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -198,7 +199,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-    private boolean isValidInput() {
+    private boolean isValidInput() {  //if the input is valid or not for the user details
         if (nameEditText.isEnabled() && nameEditText.getText().toString().trim().isEmpty()) {
             nameEditText.setError("Please enter your name");
             return false;
@@ -215,12 +216,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    private void prepopulateUserDetails(FirebaseUser user) {
+    private void prepopulateUserDetails(FirebaseUser user) { // if user details are already saved, prepopulate the fields
         if (user.getDisplayName() != null && !user.getDisplayName().isEmpty()) {
             nameEditText.setText(user.getDisplayName());
             nameEditText.setEnabled(false);
         } else {
             nameEditText.setEnabled(true);
+            nameEditText.setFocusable(true);
         }
 
         if (user.getEmail() != null && !user.getEmail().isEmpty()) {
@@ -228,6 +230,8 @@ public class LoginActivity extends AppCompatActivity {
             emailEditText.setEnabled(false);
         } else {
             emailEditText.setEnabled(true);
+            emailEditText.setFocusable(true);
+
         }
 
         if (user.getPhoneNumber() != null && !user.getPhoneNumber().isEmpty()) {
@@ -235,6 +239,7 @@ public class LoginActivity extends AppCompatActivity {
             phoneEditText.setEnabled(false);
         } else {
             phoneEditText.setEnabled(true);
+            phoneEditText.setFocusable(true);
         }
     }
 

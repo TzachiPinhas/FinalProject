@@ -2,22 +2,23 @@ package com.example.finalproject.Models;
 
 import java.util.List;
 
-public class Customer {
-    private String customerId;
+public class User {
+    private String userId;
     private String email;
     private String name;
     private String phone;
+    private String Barber;
     private List<String> appointments;
 
-    public Customer() {
+    public User() {
     }
 
-    public String getCustomerId() {
-        return customerId;
+    public String getUserId() {
+        return userId;
     }
 
-    public Customer setCustomerId(String customerId) {
-        this.customerId = customerId;
+    public User setUserId(String userId) {
+        this.userId = userId;
         return this;
     }
 
@@ -25,16 +26,18 @@ public class Customer {
         return email;
     }
 
-    public Customer setEmail(String email) {
+    public User setEmail(String email) {
         this.email = email;
         return this;
     }
+
+
 
     public String getName() {
         return name;
     }
 
-    public Customer setName(String name) {
+    public User setName(String name) {
         this.name = name;
         return this;
     }
@@ -43,7 +46,7 @@ public class Customer {
         return phone;
     }
 
-    public Customer setPhone(String phone) {
+    public User setPhone(String phone) {
         this.phone = phone;
         return this;
     }
@@ -52,8 +55,17 @@ public class Customer {
         return appointments;
     }
 
-    public Customer setAppointments(List<String> appointments) {
+    public User setAppointments(List<String> appointments) {
         this.appointments = appointments;
+        return this;
+    }
+
+    public String getBarber() {
+        return Barber;
+    }
+
+    public User setBarber(String value) {
+        Barber = value;
         return this;
     }
 }

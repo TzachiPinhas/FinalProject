@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FinalProject</string>
+    <string name="app_name">BarberShop</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -15,10 +15,8 @@
     <string name="menu_myAppointment">My Appointments</string>
     <string name="menu_log">Logout</string>
     <string name="menu_review">Reviews</string>
-
+    <string name="menu_management">Appointment Management</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-
-    fragment_date
 
 </resources>

@@ -25,22 +25,25 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
     private Context context;
     private ArrayList<Appointment> futureAppointments;
     private ArrayList<Appointment> pastAppointments;
-    private boolean showPastAppointments;  // Use this to toggle which list to display
+    private boolean showPastAppointments;
+    private boolean isBarber;
     private CancelCallback cancelCallback;
 
-    public AppointmentAdapter(Context context, ArrayList<Appointment> appointments, boolean showPastAppointments) {
+    public AppointmentAdapter(Context context, ArrayList<Appointment> appointments, boolean showPastAppointments, boolean isBarber) {
         this.context = context;
         this.futureAppointments = new ArrayList<>();
         this.pastAppointments = new ArrayList<>();
         this.showPastAppointments = showPastAppointments;
-        splitAppointments(appointments);
+        this.isBarber = isBarber;
+        splitAppointments(appointments); // Split the appointments into past and future
     }
 
     public AppointmentAdapter setAppointmentCallBack(CancelCallback cancelCallback) {
         this.cancelCallback = cancelCallback;
         return this;
     }
-    private void splitAppointments(ArrayList<Appointment> appointments) {
+
+    private void splitAppointments(ArrayList<Appointment> appointments) { // Split the appointments into past and future
         Date currentDate = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
@@ -59,7 +62,6 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
     }
 
 
-
     @NonNull
     @Override
     public AppointmentAdapter.AppointmentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -72,7 +74,10 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         Appointment appointment = getItem(position);
         holder.service_price.setText(appointment.getPrice());
         holder.type_Service.setText(appointment.getService());
-        holder.service_details.setText("On " + appointment.getDate() + ", at " + appointment.getTime());
+        if (isBarber) // If the user is a barber, show the customer's name and phone number
+            holder.service_details.setText("On " + appointment.getDate() + ", at " + appointment.getTime() + " with: " + appointment.getCustomerName() + "\nphone: " + appointment.getCostumerPhone());
+        else
+            holder.service_details.setText("On " + appointment.getDate() + ", at " + appointment.getTime());
 
         // Here we check if we should show the cancel button
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -80,7 +85,10 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
             Date appointmentDate = dateFormat.parse(appointment.getDate() + " " + appointment.getTime());
             if (appointmentDate != null && appointmentDate.before(new Date())) {
                 holder.cancel_BTN.setVisibility(View.GONE);
-                holder.service_details.setText("Done on " + appointment.getDate() + ", at " + appointment.getTime());
+                if (isBarber) // If the user is a barber, show the customer's name and phone number
+                    holder.service_details.setText("Done on " + appointment.getDate() + ", at " + appointment.getTime() + " with: " + appointment.getCustomerName() + "\nphone: " + appointment.getCostumerPhone());
+                else
+                    holder.service_details.setText("Done on " + appointment.getDate() + ", at " + appointment.getTime());
             } else {
                 holder.cancel_BTN.setVisibility(View.VISIBLE);
             }
@@ -114,7 +122,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
             cancel_BTN = itemView.findViewById(R.id.cancel_BTN);
 
             // Set up the OnClickListener for the cancel button
-            cancel_BTN.setOnClickListener(v -> {
+            cancel_BTN.setOnClickListener(v -> { // Create an AlertDialog to confirm cancellation appointment.
                 // Create an AlertDialog to confirm cancellation
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Confirm Cancellation");

@@ -12,47 +12,45 @@
     <ImageView
         android:id="@+id/imageViewLogo"
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_height="@dimen/height_image"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin"
         android:src="@drawable/logo" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/about_LBL_title"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/title_height"
         android:layout_below="@id/imageViewLogo"
         android:gravity="center"
         android:text="About us:"
         android:textColor="@color/black"
-        android:textSize="30sp"
+        android:textSize="@dimen/text_size30"
         android:textStyle="bold" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textViewIntroduction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_below="@id/about_LBL_title"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginEnd="@dimen/margin_10"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_size20"
         tools:text="Introduction" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textViewWorkingHours"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-
+        android:layout_height="@dimen/title_height"
         android:layout_below="@id/textViewIntroduction"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="@dimen/title_height"
         android:gravity="center"
         android:text="Working Hours:"
         android:textColor="@color/black"
-        android:textSize="30sp"
+        android:textSize="@dimen/text_size30"
         android:textStyle="bold" />
 
 
@@ -61,8 +59,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewWorkingHours"
-        android:layout_margin="10dp"
-        android:layout_marginTop="16dp">
+        android:layout_margin="@dimen/line_elevation"
+        android:layout_marginTop="@dimen/margin">
 
         <TableRow>
 
@@ -73,7 +71,7 @@
                 android:text="Day:"
                 android:textColor="@color/black"
 
-                android:textSize="22dp"
+                android:textSize="@dimen/text_size20"
                 android:textStyle="bold" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -82,8 +80,7 @@
                 android:layout_weight="1"
                 android:text="Hours:"
                 android:textColor="@color/black"
-
-                android:textSize="22sp"
+                android:textSize="@dimen/text_size20"
                 android:textStyle="bold" />
         </TableRow>
 
@@ -94,9 +91,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="@dimen/text_size20" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/dayHours01"
@@ -104,8 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/black"
-
-                android:textSize="20sp" />
+                android:textSize="@dimen/text_size20" />
         </TableRow>
 
         <TableRow>
@@ -116,8 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/black"
-
-                android:textSize="20sp" />
+                android:textSize="@dimen/text_size20" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/dayHours11"
@@ -125,8 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/black"
-
-                android:textSize="20sp" />
+                android:textSize="@dimen/text_size20" />
         </TableRow>
 
     </TableLayout>
@@ -134,23 +127,23 @@
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textViewAddress"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="@dimen/address_line"
         android:layout_below="@id/tableLayoutActivityHours"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_marginTop="@dimen/margin_top"
         android:textColor="@color/black"
-        android:textSize="25sp"
+        android:textSize="@dimen/text_size25"
         android:textStyle="bold"
         tools:text="Address:" />
 
 
     <RelativeLayout
         android:id="@+id/main_BTN"
-        android:layout_width="150dp"
-        android:layout_height="80dp"
+        android:layout_width="@dimen/size_btn"
+        android:layout_height="@dimen/height_btn"
         android:layout_alignParentBottom="true"
-        android:layout_margin="20dp"
-        android:layout_marginBottom="10dp"
+        android:layout_margin="@dimen/margin_20"
+        android:layout_marginBottom="@dimen/line_elevation"
         android:orientation="horizontal">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -159,14 +152,14 @@
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginStart="@dimen/margin"
+            android:layout_marginBottom="@dimen/margin"
             android:background="@drawable/phone"
             android:backgroundTint="@color/white"
             android:src="@drawable/phone"
             app:backgroundTint="@color/black"
             app:borderWidth="2dp"
-            app:maxImageSize="50dp"
+            app:maxImageSize="@dimen/image_size_50"
             app:tint="@null" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -175,14 +168,14 @@
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginStart="@dimen/margin"
+            android:layout_marginBottom="@dimen/margin"
             android:background="@drawable/map"
             android:backgroundTint="@color/white"
             android:src="@drawable/map"
             app:backgroundTint="@color/black"
             app:borderWidth="2dp"
-            app:maxImageSize="50dp"
+            app:maxImageSize="@dimen/image_size_50"
             app:tint="@null" />
 
 

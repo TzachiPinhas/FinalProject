@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finalproject.Adapters.ReviewAdapter;
-import com.example.finalproject.Interfaces.ReviewLoadListener;
+import com.example.finalproject.Listeners.ReviewLoadListener;
 import com.example.finalproject.Models.FireBaseManager;
 import com.example.finalproject.Models.Review;
 import com.example.finalproject.databinding.FragmentWriteReviewBinding;
@@ -50,19 +50,18 @@ public class WriteReviewFragment extends Fragment {
         getReviews();
         initViews();
 
-
         return root;
     }
 
     private void initViews() {
-        submitReviewButton.setOnClickListener(new View.OnClickListener() {
+        submitReviewButton.setOnClickListener(new View.OnClickListener() { // if the submit button is clicked then the review is saved to the database
             @Override
             public void onClick(View v) {
                 String userName = nameEditText.getText().toString();
                 String reviewText = reviewEditText.getText().toString();
                 float rating = ratingBar.getRating();
 
-                if (userName.isEmpty() || reviewText.isEmpty() || rating == 0) {
+                if (userName.isEmpty() || reviewText.isEmpty() || rating == 0) { // Validate the input
                     Toast.makeText(getContext(), "Please fill all fields and provide a rating.", Toast.LENGTH_LONG).show();
                     return; // Stop the submission if validation fails
                 }
@@ -74,7 +73,7 @@ public class WriteReviewFragment extends Fragment {
                         .setOverview(reviewText)
                         .setRating(rating)
                         .setDate(DateKey);
-                fbm.saveReview(review);
+                fbm.saveReview(review); // Save the review to the database
 
                 getReviews();
                 nameEditText.setText("");
@@ -85,13 +84,15 @@ public class WriteReviewFragment extends Fragment {
     }
 
 
-    private void getReviews() {
+    private void getReviews() {  // Fetch all reviews from the database
         fbm.getAllReviews(new ReviewLoadListener() {
             @Override
             public void onReviewLoaded(ArrayList<Review> reviews) {
                 if (reviews != null) {
                     processReviews(reviews);
                 }
+                else
+                    processReviews(new ArrayList<>());
             }
         });
     }
@@ -114,7 +115,8 @@ public class WriteReviewFragment extends Fragment {
 
 
 
-    private void updateAdapter() {
+
+    private void updateAdapter() { // Update the adapter with the fetched reviews
         ReviewAdapter adapter = new ReviewAdapter(getContext(), allReviews);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
