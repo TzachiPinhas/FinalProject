@@ -65,23 +65,34 @@ Barber Book streamlines the process of scheduling and managing appointments for 
 ### For Customers
 
 1. **Registration/Login**: Customers begin by registering for an account using an email and password, SMS verification, or through their Google account.
+   
 ![Registration/Login](https://github.com/TzachiPinhas/FinalProject/assets/141555220/88fa95f2-18ad-4246-882f-4b8ac3aa1b81)
+
 2. **Home Page**: Upon successful login, the home page displays upcoming appointments. Customers can navigate through different sections via the menu.
+
 ![image](https://github.com/TzachiPinhas/FinalProject/assets/141555220/a2dabbd0-d5df-4e97-b9ae-68538f1c6508)
+
 3. **Booking Appointments**: Customers select the 'Book Appointment' option where they can view a list of services offered. They select a service to see available dates and times, and book an appointment.
+   
   ![image](https://github.com/TzachiPinhas/FinalProject/assets/141555220/36cac746-3b62-4233-95d7-ce29ddc1195c)
-4. **Managing Appointments**: In the appointments section, customers can view, reschedule, or cancel their future and past appointments.
+
+5. **Managing Appointments**: In the appointments section, customers can view, reschedule, or cancel their future and past appointments.
+   
    ![image](https://github.com/TzachiPinhas/FinalProject/assets/141555220/26bf8aed-e9a9-401a-807e-7a875121ab7c)
 
 6. **Reviews and Ratings**: After an appointment, customers can leave reviews and rate the service they received, which can be viewed by other users.
+   
    ![image](https://github.com/TzachiPinhas/FinalProject/assets/141555220/52898374-99c4-4663-b48b-fa38ffc7f332)
 
 
 ### For Hairstylists
 
 1. **View Appointments**: The main dashboard displays all upcoming and past appointments. Hairstylists can filter these appointments by date. For each appointment, hairstylists can view detailed information about the customer
+   
 ![image](https://github.com/TzachiPinhas/FinalProject/assets/141555220/41bde73c-1da1-44af-90a9-0c086b69b1d3)
+
 2. **Manage Availability**: Hairstylists can access their calendar to block out days they are unavailable if no appointments are scheduled.
+   
    ![image](https://github.com/TzachiPinhas/FinalProject/assets/141555220/be6e7e1b-9639-44ae-8f3d-56a33a0e4363)
 
 ## Contributing
