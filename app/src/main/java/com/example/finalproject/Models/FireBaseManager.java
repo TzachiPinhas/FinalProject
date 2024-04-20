@@ -139,12 +139,12 @@ public class FireBaseManager {
         });
     }
 
-    public void getFirstFutureAppointment(String userId, boolean isBarber, final AppointmentLoadListener listener) { // Get first future appointment
+    public void getFirstFutureAppointment(String userId, boolean isBarber, final AppointmentLoadListener listener) {
         this.getAllAppointments(new AppointmentLoadListener() {
             @Override
             public void onAppointmentLoaded(ArrayList<Appointment> appointments) {
                 ArrayList<Appointment> myAppointments = new ArrayList<>();
-                if (!isBarber) {
+                if (!isBarber) { // If user is not a barber, get only the user's appointments
                     for (Appointment appointment : appointments) {
                         if (appointment.getIdCustomer().equals(userId)) {
                             myAppointments.add(appointment);
@@ -153,14 +153,15 @@ public class FireBaseManager {
                 } else {
                     myAppointments.addAll(appointments);
                 }
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()); // Date format for comparison
                 Date currentDate = new Date();
-                Appointment firstFutureAppointment = null;
+                Appointment firstFutureAppointment = null; // Find the first future appointment
                 for (Appointment appointment : myAppointments) {
                     try {
-                        Date appointmentDate = sdf.parse(appointment.getDate());
-                        if (appointmentDate != null && appointmentDate.after(currentDate)) {
-                            if (firstFutureAppointment == null || sdf.parse(firstFutureAppointment.getDate()).after(appointmentDate)) {
+                        Date appointmentDateTime = sdf.parse(appointment.getDate() + " " + appointment.getTime()); // Parse the date and time
+                        if (appointmentDateTime != null && appointmentDateTime.after(currentDate)) { // Check if the appointment is in the future
+                            if (firstFutureAppointment == null || sdf.parse(firstFutureAppointment.getDate() + " " + firstFutureAppointment.getTime()).after(appointmentDateTime)) {
+                                // If the appointment is the first future appointment or the appointment is earlier than the current first future appointment
                                 firstFutureAppointment = appointment;
                             }
                         }

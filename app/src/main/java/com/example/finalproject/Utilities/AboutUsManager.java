@@ -16,7 +16,7 @@ public class AboutUsManager {
     public static String[][] getInfoArray() {
         String info[][] = new String[2][2];
         info[0][0] = "Sunday - Thursday";
-        info[0][1] = "9:00 - 17:00";
+        info[0][1] = "9:00 - 17:30";
         info[1][0] = "Friday - Saturday";
         info[1][1] = "Closed";
         return info;
