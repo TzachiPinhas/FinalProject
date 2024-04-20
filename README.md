@@ -76,11 +76,11 @@ Barber Book streamlines the process of scheduling and managing appointments for 
    
   ![image](https://github.com/TzachiPinhas/FinalProject/assets/141555220/36cac746-3b62-4233-95d7-ce29ddc1195c)
 
-5. **Managing Appointments**: In the appointments section, customers can view, reschedule, or cancel their future and past appointments.
+4. **Managing Appointments**: In the appointments section, customers can view, reschedule, or cancel their future and past appointments.
    
    ![image](https://github.com/TzachiPinhas/FinalProject/assets/141555220/26bf8aed-e9a9-401a-807e-7a875121ab7c)
 
-6. **Reviews and Ratings**: After an appointment, customers can leave reviews and rate the service they received, which can be viewed by other users.
+5. **Reviews and Ratings**: After an appointment, customers can leave reviews and rate the service they received, which can be viewed by other users.
    
    ![image](https://github.com/TzachiPinhas/FinalProject/assets/141555220/52898374-99c4-4663-b48b-fa38ffc7f332)
 
